@@ -1,9 +1,15 @@
+import { useSession } from "next-auth/react";
 import Button from "./Button";
 import ProfileImage from "./ProfileImage";
 
 export default function NewTweetForm() {
+  const session = useSession();
+  //!!
+  //TODO:
+  //  if (session.status !== "authenticated") return null;
 
   const getFillerText = () => {
+
     const proomptsArr = [`What's Shakin' Bacon?`, `What's The Word?`, `What'cha Know, Joe?`, `What's Crack-A-Lackin'?`, `How Goes?`, `Que Pasa?`, `What's the Skinny?`, `What's the Jive, Clive?`, `Whatcha Thinkin'bout?`]
     return proomptsArr[Math.floor(Math.random() * proomptsArr.length)]?.concat(`...`)
   }
@@ -12,7 +18,7 @@ export default function NewTweetForm() {
     <>
       <form action="" className="flex flex-col gap-2 border-b px-4 py-2">
         <div className="flex gap-4">
-          <ProfileImage />
+          <ProfileImage imageSrc={session.data?.user.image} />
           <textarea className="flex-grow resize-none overflow-hidden border border-amber-200 focus-visible:outline-amber-900 p-4 rounded text-lg" name="new_tweet" id="new_tweet" placeholder={getFillerText()} />
         </div>
         {/* button styles are passed through className as a "className" prop on the <Button> component

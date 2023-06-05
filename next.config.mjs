@@ -8,6 +8,8 @@ await import("./src/env.mjs");
 const config = {
   reactStrictMode: true,
 
+  images: { domains: ["cdn.discordapp.com", "avatars.githubusercontent.com"] },
+
   /**
    * If you have `experimental: { appDir: true }` set, then you must comment the below `i18n` config
    * out.
@@ -20,3 +22,16 @@ const config = {
   },
 };
 export default config;
+
+/*
+ images: {
+     remotePatterns: [
+       {
+         protocol: 'https',
+       hostname: 'avatars.githubusercontent.com',
+       port: '',
+       pathname: '/u/**',
+     }
+   ]
+ }
+*/
