@@ -35,7 +35,7 @@ export default function InfiniteTweetList({ isLoading, isError, hasMore, fetchNe
       dataLength={tweets.length}
       next={fetchNewTweets}
       hasMore={hasMore}
-      loading={`Loading...`} // TODO: LOADING WIDGET
+      loader={<h3>Loading...</h3>} // TODO: LOADING WIDGET
     >
       {
         tweets.map((tweet) => {
