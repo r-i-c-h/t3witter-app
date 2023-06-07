@@ -13,7 +13,7 @@ export default function NewTweetForm() {
   const createNewPost = api.tweet.create.useMutation({
     onSuccess: (newTwit) => {
       console.log(newTwit)
-      setInputValue("Ku");
+      setInputValue("");
     }
   })
 

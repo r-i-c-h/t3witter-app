@@ -1,4 +1,4 @@
-import { useCallback, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useLayoutEffect, useRef } from "react";
 interface ExpandingTextAreaProps {
   inputValue: string;
   setInputValue: (val: string) => void;
@@ -35,9 +35,10 @@ export default function ExpandingTextArea({ inputValue, setInputValue }: Expandi
       ref={inputRef}
       name="new_tw33t"
       id="new_tw33t"
-      /* style height:0 because text-area will self-enlarge via updateSize() above  */
+      /* style height is 0 because text-area will self-enlarge via updateSize() above  */
       style={{ height: 0 }}
       placeholder={getFillerText()}
+      value={inputValue}
       onChange={e => setInputValue(e.target.value)}
     />
   );
