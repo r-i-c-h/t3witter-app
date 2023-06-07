@@ -49,8 +49,7 @@ export const tweetRouter = createTRPCRouter({
           const { id, content, createdAt, _count } = tweet;
           const countVal = _count as { likes: number } // Makes @ts happy
           const likeCount = countVal.likes;
-          const likesArr = tweet.likes as Like[]; // Makes @ts happy
-          const likedByMe: boolean = likesArr.length > 0;
+          const likedByMe: boolean = tweet.likes.length > 0;
           const user = tweet.user as User // Makes @ts happy
           return { id, content, createdAt, user, likeCount, likedByMe };
         })
