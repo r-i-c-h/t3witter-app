@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from "next/image";
 import { type Tweet } from './InfiniteTweetsList';
 import ProfileImage from './ProfileImage';
 import { useSession } from 'next-auth/react';
