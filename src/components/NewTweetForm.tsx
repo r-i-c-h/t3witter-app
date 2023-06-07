@@ -20,7 +20,9 @@ export default function NewTweetForm() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     const content = inputValue;
-    createNewPost.mutate({ content });
+    if (content.length > 1) {
+      createNewPost.mutate({ content });
+    }
   }
 
   //TODO: MAKE PRETTIER
