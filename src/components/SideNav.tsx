@@ -1,5 +1,7 @@
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
+import HoverEffectWidget from "./HoverEffectWidget";
+import { HomeIcon, ProfileIcon, LoginIcon, LogoutIcon } from "./IconsLib";
 
 export default function SideNav() {
   const session = useSession();
@@ -13,28 +15,53 @@ export default function SideNav() {
     void signIn();
   }
 
-
   return (
     <nav className="sticky top-0 px-2 py-4">
-      {/* ^^ - ? self-start ? */}
-      <h2>NAV</h2>
       <ul className="flex flex-col items-start gap-2 whitespace-nowrap">
         <li>
-          <Link href="/">Home</Link>
+          <Link href="/">
+            <HoverEffectWidget>
+              <span className="flex items-center gap-2">
+                <HomeIcon />
+                <span className="hidden text-lg md:inline">Home</span>
+              </span>
+            </HoverEffectWidget>
+          </Link>
         </li>
         {user != null ? ( // User IS Logged IN
           <li>
-            <Link href={`/profiles/${user.id}`}>Profile</Link>
+            <Link href={`/profiles/${user.id}`}>
+              <HoverEffectWidget>
+                <span className="flex items-center gap-2">
+                  <ProfileIcon />
+                  <span className="hidden text-lg md:inline">Profile</span>
+                </span>
+              </HoverEffectWidget>
+            </Link>
           </li>
         ) : null
         }
         {user != null ? ( // User IS Logged IN
           <li>
-            <button onClick={handleLogout}>Log Out</button>
+            <HoverEffectWidget red>
+              <button onClick={handleLogout} className="group">
+                <span className="flex items-center gap-2 group">
+                  <LogoutIcon className="group-hover:stroke-red-800" />
+                  <span className="hidden text-lg group-hover:text-red-800 md:inline">Logout</span>
+                </span>
+              </button>
+            </HoverEffectWidget>
           </li>
         ) : (
           <li>
-            <button onClick={handleLogin}>Log In</button>
+            <HoverEffectWidget>
+              <button onClick={handleLogin}>
+                <span className="flex items-center gap-2">
+                  <LoginIcon />
+                  <span className="hidden text-lg md:inline">Login</span>
+                </span>
+              </button>
+            </HoverEffectWidget>
           </li>
         )
         }
