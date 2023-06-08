@@ -13,7 +13,7 @@ export const tweetRouter = createTRPCRouter({
       cursor: z.object({ id: z.string(), createdAt: z.date() }).optional()
     }))
     .query(
-      async ({ input: { limit = 20, cursor }, ctx }) => {
+      async ({ input: { limit = 10, cursor }, ctx }) => {
         const currentUserId = ctx.session?.user.id;
 
         const data = await ctx.prisma.tweet.findMany({
