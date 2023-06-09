@@ -3,14 +3,48 @@ import { api } from '~/utils/api';
 import { type Tweet } from './InfiniteTweetsList';
 import ProfileImage from './ProfileImage';
 import HeartLikeButton from './HeartLikeButton';
+import Trpc from '~/pages/api/trpc/[trpc]';
 
 
 //! ?? Replace this native time formatter with Luxon.js / Date-fns / Day.js for nicer relative-time??
 const nativeTimeFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }); // <~~ Doesn't do relative time
 
 export default function TweetCard({ id, user, content, createdAt, likeCount, likedByMe }: Tweet) {
+  const trpcUtils = api.useContext();
+  const toggleLike = api.tweet.toggleLike.useMutation({
+    onSuccess: ({ addedLike }) => {
+      // ❌ await trpcUtils.tweet.infiniteFeed.invalidate(); /* Refetches ALL Data ❌❌❌ [+ would need an async] */
+      const updateData: Parameters<typeof trpcUtils.tweet.infiniteFeed.setInfiniteData>[1] = (cachedData) => {
+        if (cachedData == null) { return; }
 
-  const toggleLike = api.tweet.toggleLike.useMutation()
+        const likeCountDelta = addedLike ? 1 : -1;
+        return {
+          ...cachedData,
+          pages: cachedData.pages.map(pg => {
+            return {
+              ...pg,
+              tweets: pg.tweets.map(tweet => {  // go through each tweet on the page
+                if (tweet.id === id) {   // If the IDs match...
+                  return {
+                    ...tweet,
+                    likeCount: tweet.likeCount + likeCountDelta,
+                    likedByMe: addedLike
+                  }
+                }
+
+                return tweet;  // Otherwise fogettaboutit
+              })
+
+            }
+          })
+        }
+      }
+
+      trpcUtils.tweet.infiniteFeed.setInfiniteData({}, updateData);
+    },
+  });
+
+
   function handleToggleLike() { toggleLike.mutate({ id }) }
 
   return (
