@@ -7,11 +7,13 @@ import {
 } from "~/server/api/trpc";
 
 export const tweetRouter = createTRPCRouter({
-  infiniteFeed: publicProcedure.input(
-    z.object({
-      limit: z.number().optional(),
-      cursor: z.object({ id: z.string(), createdAt: z.date() }).optional()
-    }))
+  infiniteFeed: publicProcedure
+    .input(
+      z.object({
+        limit: z.number().optional(),
+        cursor: z.object({ id: z.string(), createdAt: z.date() }).optional()
+      })
+    )
     .query(
       async ({ input: { limit = 10, cursor }, ctx }) => {
         const currentUserId = ctx.session?.user.id;
@@ -38,7 +40,7 @@ export const tweetRouter = createTRPCRouter({
 
         /** Setup Next Cursor for data 'pagination' */
         let nextCursor: typeof cursor | undefined;
-        if (data.length > limit) {
+        if ((data) && (data.length > limit)) {
           const nextItem = data.pop();
           if (nextItem != null) { // @ts is unhappy with "!=="? Wants "!="" instead 🤷‍♂️
             nextCursor = { id: nextItem?.id, createdAt: nextItem?.createdAt }
@@ -68,5 +70,22 @@ export const tweetRouter = createTRPCRouter({
       })
 
       return tweet;
+    }),
+  toggleLike: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ input: { id }, ctx }) => {
+      const data = { tweetId: id, userId: ctx.session.user.id }
+
+      const existingLike = await ctx.prisma.like.findUnique({
+        where: { userId_tweetId: data }
+      })
+
+      if (existingLike == null) {
+        await ctx.prisma.like.create({ data })
+        return { addedLike: true }
+      } else {
+        await ctx.prisma.like.delete({ where: { userId_tweetId: data } })
+        return { addedLike: false }
+      }
     })
 });

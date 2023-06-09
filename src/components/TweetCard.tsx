@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { api } from '~/utils/api';
 import { type Tweet } from './InfiniteTweetsList';
 import ProfileImage from './ProfileImage';
 import HeartLikeButton from './HeartLikeButton';
@@ -9,6 +10,8 @@ const nativeTimeFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'med
 
 export default function TweetCard({ id, user, content, createdAt, likeCount, likedByMe }: Tweet) {
 
+  const toggleLike = api.tweet.toggleLike.useMutation()
+  function handleToggleLike() { toggleLike.mutate({ id }) }
 
   return (
     <li
@@ -28,6 +31,8 @@ export default function TweetCard({ id, user, content, createdAt, likeCount, lik
         <p className="whitespace-pre-wrap font-semibold mt-1">{content}</p>
         <div className="flex items-center gap-1 self-start text-gray-700">
           <HeartLikeButton
+            handleClick={handleToggleLike}
+            isLoading={toggleLike.isLoading}
             likedByMe={likedByMe}
             likedCount={likeCount}
           />
