@@ -1,4 +1,4 @@
-import { type User, type Like } from "@prisma/client";
+import { type User/*, type Like */ } from "@prisma/client";
 import { z } from "zod";
 import {
   createTRPCRouter,

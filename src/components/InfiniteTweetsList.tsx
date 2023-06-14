@@ -30,7 +30,7 @@ export default function InfiniteTweetList({ isLoading, isError, hasMore, fetchNe
     )
   }
 
-  return <ul>
+  return (<ul>
     <InfiniteScroll
       dataLength={tweets.length}
       next={fetchNewTweets}
@@ -43,5 +43,5 @@ export default function InfiniteTweetList({ isLoading, isError, hasMore, fetchNe
         })
       }
     </InfiniteScroll>
-  </ul>
+  </ul>)
 }
