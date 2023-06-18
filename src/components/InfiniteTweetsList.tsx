@@ -17,12 +17,12 @@ interface InfiniteTweetListProps {
   tweets?: Tweet[];
 }
 
-export default function InfiniteTweetList({ isLoading, isError, hasMore, fetchNewTweets, tweets }: InfiniteTweetListProps) {
+export default function InfiniteTweetList({ tweets, isLoading, isError, hasMore = false, fetchNewTweets }: InfiniteTweetListProps) {
   if (isLoading) { //TODO: LOADING WIDGET
-    return <h2>Loading..</h2>
+    return <h2>Inf Tweet List Loading..</h2>
   }
   if (isError) { //TODO: ERROR WIDGET
-    return <h2>ERROR</h2>
+    return <h2>ERROR on Inf Tweet List</h2>
   }
   if (tweets == null || tweets?.length === 0) {
     return (
