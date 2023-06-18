@@ -24,8 +24,11 @@ function Form() {
 
       if (session.status !== "authenticated") return; // <~~ clears @TS error for getting id below 👌🤷
 
-      // @ts-expect-error - For some reason the mutation of the cachedData, by having the first tweet appended to the front, causes a recursive TS-Error
+      // In cachedData, the embedded individual Tweets DO NOT HAVE A top-level userId property, just a User{ id }
+      // but newTwit automatically comes back with a userID property
+      // @ts-expect-error - not sure why returning from .setInfinite data causes a TS error.
       trpcUtils.tweet.infiniteFeed.setInfiniteData({}, (cachedData) => {
+
         if (!cachedData || cachedData == null || cachedData.pages[0] == null) {
           // per https://trpc.io/docs/client/react/useInfiniteQuery#setinfinitedata
           return {
@@ -45,6 +48,10 @@ function Form() {
           },
         };
 
+        const newFilteredDataObj = Object.fromEntries(
+          Object.entries(newMsgData).filter(kvArr => kvArr[0] !== "userId")
+        )
+
         const pages = cachedData.pages.slice();
         const firstPage = pages[0];
         const laterPages = cachedData.pages.slice(1);
@@ -54,7 +61,7 @@ function Form() {
           ...cachedData,
           pages: [{
             ...firstPage,
-            tweets: [newMsgData, ...firstPageTweets]
+            tweets: [newFilteredDataObj, ...firstPageTweets]
           },
           ...laterPages
           ]
