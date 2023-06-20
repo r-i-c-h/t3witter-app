@@ -7,15 +7,18 @@ interface HeartLikeButtonProps {
   isLoading: boolean;
   likedByMe: boolean;
   likedCount: number;
+  size?: number;
 }
 
-export default function HeartLikeButton({ isLoading, handleClick, likedByMe, likedCount }: HeartLikeButtonProps) {
+export default function HeartLikeButton({ isLoading, handleClick, likedByMe, likedCount, size = 4 }: HeartLikeButtonProps) {
   const session = useSession();
+
+  const heartSize = `h-${size} w-${size}`;
 
   // Public View
   if (session.status !== "authenticated") {
     return (<>
-      <HeartIcon className="h-4 w-4 stroke-black stroke-2 fill-gray-500" />
+      <HeartIcon className={`${heartSize} stroke-black stroke-2 fill-gray-500`} />
       <span>{likedCount}</span>
     </>
     );
@@ -29,7 +32,7 @@ export default function HeartLikeButton({ isLoading, handleClick, likedByMe, lik
       className={`group flex items-center self-start transition-colors duration-200 stroke-amber-900 -ml-2`}
     >
       <HoverEffectWidget red>
-        <HeartIcon className={`transition-colors duration-300
+        <HeartIcon className={`transition-colors duration-300 ${heartSize}
           ${likedByMe ? 'fill-amber-500 group-hover:fill-transparent group-focus-visible:fill-transparent group-hover:stroke-gray-500 group-focus-visible:stroke-gray-500'
             : 'fill-transparent group-hover:fill-amber-500 group-focus-visible:fill-amber-500'
           }

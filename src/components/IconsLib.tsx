@@ -42,8 +42,8 @@ export function LoginIcon(props: SVGAttributes<SVGElement>) {
 }
 
 export function HeartIcon(props: SVGAttributes<SVGElement>) {
-  // This HAD a default h-6/w-6, which was being overridden in className props, but the h-6/w-6 specificity
-  // overwrote that. Therefore, nuked the "default" h-6/w-6 over here.
+  //! This HAD a default h-6/w-6, but the h-6/w-6 specificity overwrote changes from  className props,
+  //! Therefore, nuked the "default" sizing here, and left size to be set in SVG implementation.
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" {...props}
       className={`stroke-2 stroke-current ${props.className ?? ''}`}
