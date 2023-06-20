@@ -5,6 +5,7 @@ import { /* signIn, signOut, */ useSession } from "next-auth/react";
 import NewTweetForm from "~/components/NewTweetForm";
 import RecentTweets from "~/components/RecentTweets";
 import FollowingTweets from "~/components/FollowingTweets";
+import LoadingSpinner from "~/components/LoadingSpinner";
 
 const TABS = ["Recent", "Following"] as const; // ?? Why Does this even work?🤣
 
@@ -21,12 +22,8 @@ const Home: NextPage = () => {
   //    return <h2>Please <button onClick={handleLogin}>Log In</button></h2>
   //  }
 
-  if (session.status === "loading") {
-    //TODO: LOADING WIDGET
-    return <h2>LOADING</h2>
-  }
+  if (session.status === "loading") { return <LoadingSpinner big={true} /> }
 
-  // TODO: Method to switch to *only* show accounts the user is following instead of all recent tweets...
   return (
     <>
       <header className="sticky top-0 z-10 border-b bg-slate-50 pt-2">
