@@ -15,6 +15,8 @@ interface InfiniteTweetListProps {
   hasMore: boolean;
   fetchNewTweets: () => Promise<unknown>;
   tweets?: Tweet[];
+  onlyFollowedUsers?: boolean;
+
 }
 
 export default function InfiniteTweetList({ tweets, isLoading, isError, hasMore = false, fetchNewTweets }: InfiniteTweetListProps) {
