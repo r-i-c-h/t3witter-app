@@ -42,9 +42,11 @@ export function LoginIcon(props: SVGAttributes<SVGElement>) {
 }
 
 export function HeartIcon(props: SVGAttributes<SVGElement>) {
+  // This HAD a default h-6/w-6, which was being overridden in className props, but the h-6/w-6 specificity
+  // overwrote that. Therefore, nuked the "default" h-6/w-6 over here.
   return (
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" aria-hidden="true" strokeLinecap="round" strokeLinejoin="round" fill="currentColor" {...props}
-      className={`stroke-2 stroke-current h-6 w-6 ${props.className ?? ''}`}
+      className={`stroke-2 stroke-current ${props.className ?? ''}`}
     >
       <path d="M16 8.5C16 4.361 19.361 1 23.5 1 27.639 1 31 4.361 31 8.5c0 2.986-1.5 5.625-3 7.5L16 31 4 16c-1.5-1.875-3-4.514-3-7.5C1 4.361 4.361 1 8.5 1 12.639 1 16 4.361 16 8.5Z" />
     </svg>
