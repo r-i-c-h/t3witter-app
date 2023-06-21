@@ -21,7 +21,7 @@ export default function SideNav() {
         <li>
           <Link href="/">
             <HoverEffectWidget>
-              <span className="flex items-center gap-2">
+              <span className="flex items-center gap-2" title="Home">
                 <HomeIcon />
                 <span className="hidden text-lg md:inline">Home</span>
               </span>
@@ -32,7 +32,7 @@ export default function SideNav() {
           <li>
             <Link href={`/profiles/${user.id}`}>
               <HoverEffectWidget>
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2" title="Profile">
                   <ProfileIcon />
                   <span className="hidden text-lg md:inline">Profile</span>
                 </span>
@@ -44,7 +44,7 @@ export default function SideNav() {
         {user != null ? ( // User IS Logged IN
           <li>
             <HoverEffectWidget red>
-              <button onClick={handleLogout} className="group">
+              <button onClick={handleLogout} className="group" title="Logout">
                 <span className="flex items-center gap-2 group">
                   <LogoutIcon className="group-hover:stroke-red-800" />
                   <span className="hidden text-lg group-hover:text-red-800 md:inline">Logout</span>
@@ -56,7 +56,7 @@ export default function SideNav() {
           <li>
             <HoverEffectWidget>
               <button onClick={handleLogin}>
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2" title="Login">
                   <LoginIcon />
                   <span className="hidden text-lg md:inline">Login</span>
                 </span>
