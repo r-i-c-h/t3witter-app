@@ -3,8 +3,6 @@ import { api } from '~/utils/api';
 import { type Tweet } from './InfiniteTweetsList';
 import ProfileImage from './ProfileImage';
 import HeartLikeButton from './HeartLikeButton';
-import Trpc from '~/pages/api/trpc/[trpc]';
-
 
 //! ?? Replace this native time formatter with Luxon.js / Date-fns / Day.js for nicer relative-time??
 const nativeTimeFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'medium' }); // <~~ Doesn't do relative time
@@ -41,9 +39,10 @@ export default function TweetCard({ id, user, content, createdAt, likeCount, lik
       }
 
       trpcUtils.tweet.infiniteFeed.setInfiniteData({}, updateData);
+      trpcUtils.tweet.infiniteFeed.setInfiniteData({ onlyFollowed: true }, updateData);
+      trpcUtils.tweet.infiniteProfileFeed.setInfiniteData({ userId: user.id }, updateData);
     },
   });
-
 
   function handleToggleLike() { toggleLike.mutate({ id }) }
 

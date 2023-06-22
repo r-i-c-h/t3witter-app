@@ -1,30 +1,47 @@
 //!!! Profiles use Static Site Generation
 import type { NextPage, GetStaticPropsContext, GetStaticPaths, InferGetStaticPropsType } from "next";
-import Head from "next/head";
 import ssgHelper from "~/server/api/ssgHelper";
-import { api } from "~/utils/api";
+import Head from "next/head";
 import ErrorPage from 'next/error';
 import Link from "next/link";
+import { api } from "~/utils/api";
+import getPluralString from "~/utils/getPluralString";
 import { LeftArrow } from "~/components/IconsLib";
 import HoverEffectWidget from "~/components/HoverEffectWidget";
 import ProfileImage from "~/components/ProfileImage";
-import getPluralString from "~/utils/getPluralString";
 import InfiniteTweetList from "~/components/InfiniteTweetsList";
 import FollowUserButton from "~/components/FollowUserButton";
 
 // NextPage needs an arrow func 🤷‍♂️
 // Props are defined by the getStaticProps() function below.
 export const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps>> = ({ id }) => {
-  const { data: profile } = api.profile.getById.useQuery({ id }) // data *should* be in cache because of `prefetch()` below
+  const trpcUtils = api.useContext()
 
-  if (!profile || !profile.name) { // should be impossible
+  const { data: profile } = api.profile.getById.useQuery({ id }) // data *should* be in cache because of `prefetch()` below
+  if (!profile || !profile.name) { // should be impossible = no user found with this id
     return <ErrorPage statusCode={404} />
   }
+
   const { tweetsCount, followersCount, followsCount, isFollowing } = profile;
   const tweets = api.tweet.infiniteProfileFeed.useInfiniteQuery(
     { userId: id },
     { getNextPageParam: (lastPage) => lastPage.nextCursor }
   )
+  const toggleFollowing = api.profile.toggleFollowing.useMutation({
+    onSuccess: ({ didAddAsNewFollower }) => {
+      trpcUtils.profile.getById.setData({ id }, oldData => {
+        if (oldData == null) { return }
+
+        const countModifier = didAddAsNewFollower ? 1 : -1
+
+        return {
+          ...oldData,
+          isFollowing: didAddAsNewFollower,
+          followersCount: oldData.followersCount + countModifier
+        }
+      })
+    }
+  });
 
   return (<>
     <Head>
@@ -45,7 +62,12 @@ export const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps
           <span className="pl-1">|&nbsp;{followsCount}&nbsp;Following</span>
         </div>
       </div>
-      <FollowUserButton isFollowing={isFollowing} userId={id} onClick={() => null} />
+      <FollowUserButton
+        isFollowing={isFollowing}
+        userId={id}
+        isLoading={toggleFollowing.isLoading}
+        clickHandler={() => toggleFollowing.mutate({ userId: id })}
+      />
     </header>
     <main>
       <InfiniteTweetList
