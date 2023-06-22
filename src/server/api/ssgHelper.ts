@@ -8,6 +8,6 @@ export default function ssgHelper() {
   return createServerSideHelpers({
     router: appRouter,
     transformer: SuperJSON,
-    ctx: createInnerTRPCContext({ session: null }) // No {session} since rendering is on server.
+    ctx: createInnerTRPCContext({ session: null, revalidateSSG: null }) // No {session} since rendering is on server.
   })
 }

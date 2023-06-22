@@ -53,6 +53,9 @@ export const tweetRouter = createTRPCRouter({
         }
       })
 
+      //** Trigger SSG Profile Revalidation\Rebuild **/
+      void ctx.revalidateSSG?.(`/profiles/${ctx.session.user.id}`) // "void" = do not bother to [a]wait
+
       return tweet;
     }),
   toggleLike: protectedProcedure

@@ -41,7 +41,7 @@ export const profileRouter = createTRPCRouter({
       const existingFollow = await ctx.prisma.user.findFirst({ // only get data if followed by currently auth'd
         where: {
           id: userId, // target acct
-          followers: { some: { id: currentUserId } } // do I follow?
+          followers: { some: { id: currentUserId } } // does currUser follow?
         }
       });
 
@@ -62,14 +62,20 @@ export const profileRouter = createTRPCRouter({
           where: { id: userId },
           data: {
             followers: {
-              disconnect: { id: currentUserId } // REMOVE
+              disconnect: { id: currentUserId } // Remove user from the list
             },
           }
         })
         didAddAsNewFollower = false;
       }
 
-      // Revalidation - Profiles are SSG, without revalidation they will have a bad Followers qty
+      // ** Revalidation Triggers ** -
+      // Profiles are SSG, without revalidation they will have bad Followers/Following qtys
+      // Revalidate person being followed
+      void ctx.revalidateSSG?.(`/profiles/${userId}`) // "void" = do not bother to [a]wait
+      // Revalidate currUser doing the following
+      void ctx.revalidateSSG?.(`/profiles/${currentUserId}`) // "void" = do not bother to [a]wait
+
       return { didAddAsNewFollower }
     })
 });

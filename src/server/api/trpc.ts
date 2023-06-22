@@ -17,30 +17,30 @@ import { prisma } from "~/server/db";
 
 /**
  * 1. CONTEXT
- *
  * This section defines the "contexts" that are available in the backend API.
- *
  * These allow you to access things when processing a request, like the database, the session, etc.
  */
-
 type CreateContextOptions = {
   session: Session | null;
-};
-
+  //! ~~> ⚠️⚠️ ADD Revalidation to type for triggering Profile regeneration.
+  //!  Type definition is copypasta from res.revalidate definition
+  revalidateSSG?: ((urlPath: string, opts?: {
+    unstable_onlyGenerated?: boolean | undefined;
+  } | undefined) => Promise<void>) | null;
+}
 /**
- * This helper generates the "internals" for a tRPC context. If you need to use it, you can export
- * it from here.
- *
+ * This helper generates the "internals" for a tRPC context. If you need to use it, you can export it from here.
  * Examples of things you may need it for:
  * - testing, so we don't have to mock Next.js' req/res
  * - tRPC's `createSSGHelpers`, where we don't have req/res
- *
  * @see https://create.t3.gg/en/usage/trpc#-serverapitrpcts
  */
-// NEED TO EXPORT FOR SSR of <Profile> PAGES
+
+//! ~~> MANUALLY ALTERED & EXPORTed for SSG of <Profile> Pages
 export const createInnerTRPCContext = (opts: CreateContextOptions) => {
   return {
     session: opts.session,
+    revalidateSSG: opts.revalidateSSG,
     prisma,
   };
 };
@@ -48,7 +48,6 @@ export const createInnerTRPCContext = (opts: CreateContextOptions) => {
 /**
  * This is the actual context you will use in your router. It will be used to process every request
  * that goes through your tRPC endpoint.
- *
  * @see https://trpc.io/docs/context
  */
 export const createTRPCContext = async (opts: CreateNextContextOptions) => {
@@ -59,6 +58,7 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
 
   return createInnerTRPCContext({
     session,
+    revalidateSSG: res.revalidate //! Added for SSG triggering
   });
 };
 
