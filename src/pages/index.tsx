@@ -7,27 +7,34 @@ import RecentTweets from "~/components/RecentTweets";
 import FollowingTweets from "~/components/FollowingTweets";
 import LoadingSpinner from "~/components/LoadingSpinner";
 
-const TABS = ["Recent", "Following"] as const; // ?? Why Does this even work?🤣
+const TABS = ["Recent", "Following"] as const; // Doesn't work as pure Enum?
 
 const Home: NextPage = () => {
   const session = useSession();
   const [selectedTab, setSelectedTab] = useState<(typeof TABS)[number]>("Recent");
 
-  //! PROTECT FEEDS \ Implement Login+Logout here or only in Sidebar?!?
-  // const handleLogin = () => { // <~~ Make TS Happy with void wrapper
-  // void signIn();
-  // }
+  // TS wants a login function to have the below void-wrapper:
+  //>> const handleLogin = () => { void signIn(); }
+
+  // For a fully-private non-Twitter experience protect feeds and implement Login+Logout here, not only in Sidebar
   //  if (session.status === "unauthenticated") {
-  //    //TODO: LOGIN FRONT WIDGET [maybe - would kill the "public" feed
-  //    return <h2>Please <button onClick={handleLogin}>Log In</button></h2>
+  //  ...LOGIN WIDGET ala... return <h2>Please <button onClick={handleLogin}>Log In</button></h2>
   //  }
 
   if (session.status === "loading") { return <LoadingSpinner big={true} /> }
 
+  let welcomeString;
+  if (session.status === "authenticated") {
+    const baseName = session.data?.user.name;
+    welcomeString = baseName?.split(' ')[0];
+  } else {
+    welcomeString = "to T3witter"
+  }
+
   return (
     <>
       <header className="sticky top-0 z-10 border-b bg-slate-50 pt-2">
-        <h1 className="mb-2 px-4 py-1 text-2xl font-bold">Welcome</h1>
+        <h1 className=" md:text-left text-center mb-2 px-4 py-1 text-2xl font-bold">Welcome <span className="">{welcomeString}</span></h1>
         {session.status === "authenticated" && (<>
           <div className="flex">
             {TABS.map(tab => {

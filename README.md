@@ -32,7 +32,7 @@ Starts with [T3-Stack](https://create.t3.gg/) via _`create-t3-app`_:
 - [ ] Fix color a11y issues - Amber-500: #F59E0B | amber-200: #FDE68A | amber-700: #B45309
 - [ ] Revise [SELF Profile Page] Header to mobile layout and responsive size increases.
 - [ ] Revise [Profile Page] Header to mobile layout and responsive size increases INCLUDE FOLLOW BUTTON.
-- [ ] Add Logged in User's name to "Welcome" || Change to "Home"
+- [x] Add Logged in User's name to "Welcome" || Change to "Home"
 - [ ] Add Better Time-tracking lib to get prettier relative-time stamping on TweetCard
 
 ### Upgradables...
