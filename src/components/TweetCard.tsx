@@ -10,12 +10,12 @@ const nativeTimeFormatter = new Intl.DateTimeFormat(undefined, { dateStyle: 'med
 export default function TweetCard({ id, user, content, createdAt, likeCount, likedByMe }: Tweet) {
   const trpcUtils = api.useContext();
   const toggleLike = api.tweet.toggleLike.useMutation({
-    onSuccess: ({ addedLike }) => {
+    onSuccess: ({ didAddLike }) => {
       // ❌ await trpcUtils.tweet.infiniteFeed.invalidate(); /* Refetches ALL Data ❌❌❌ [+ would need an async] */
       const updateData: Parameters<typeof trpcUtils.tweet.infiniteFeed.setInfiniteData>[1] = (cachedData) => {
         if (cachedData == null) { return; }
 
-        const likeCountDelta = addedLike ? 1 : -1;
+        const likeCountDelta = didAddLike ? 1 : -1;
         return {
           ...cachedData,
           pages: cachedData.pages.map(pg => {
@@ -26,7 +26,7 @@ export default function TweetCard({ id, user, content, createdAt, likeCount, lik
                   return {
                     ...tweet,
                     likeCount: tweet.likeCount + likeCountDelta,
-                    likedByMe: addedLike
+                    likedByMe: didAddLike
                   }
                 }
 
