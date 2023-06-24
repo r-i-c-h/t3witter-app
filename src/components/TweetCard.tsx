@@ -54,12 +54,12 @@ export default function TweetCard({ id, user, content, createdAt, likeCount, lik
         <ProfileImage imageSrc={user.image} />
       </Link>
       <div className="felx flex-grow flex-col">
-        <div className="flex gap-1">
+        <div className="flex gap-1 items-center">
           <Link
             href={`/profiles/${user.id}`}
             className='font-bold text-amber-500 hover:underline focus-visible:underline outline-none '
           >{user.name}</Link>
-          <span className="text-gray-500">-{nativeTimeFormatter.format(createdAt)}</span>
+          <span className="text-gray-500 text-xs italic">- {nativeTimeFormatter.format(createdAt)}</span>
         </div>
         <p className="whitespace-pre-wrap font-semibold mt-1">{content}</p>
         <div className="flex items-center gap-1 self-start text-gray-700">

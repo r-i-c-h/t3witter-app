@@ -27,7 +27,7 @@ Starts with [T3-Stack](https://create.t3.gg/) via _`create-t3-app`_:
 ## TODOs...
 
 - [ ] Revise Tweetcard Styling to shrink vertical size of <3 line OR increase other line-heights
-- [ ] Revise Tweetcard Styling to shrink date/timing font but maintain vertical alignment
+- [x] Revise Tweetcard Styling to shrink date/timing font but maintain vertical alignment
 - [ ] Change wording for # of users followed on profile stats
 - [ ] Fix color a11y issues - Amber-500: #F59E0B | amber-200: #FDE68A | amber-700: #B45309
 - [ ] Revise [SELF Profile Page] Header to mobile layout and responsive size increases.
