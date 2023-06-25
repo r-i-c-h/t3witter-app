@@ -1,6 +1,8 @@
 import InfiniteScroll from "react-infinite-scroll-component";
 import TweetCard from "./TweetCard";
 import LoadingSpinner from "./LoadingSpinner";
+import ErrorBox from "./ErrorBox";
+
 export interface Tweet {
   id: string;
   content: string;
@@ -23,8 +25,13 @@ interface InfiniteTweetListProps {
 export default function InfiniteTweetList({ tweets, isLoading, isError, hasMore = false, fetchNewTweets }: InfiniteTweetListProps) {
   if (isLoading) { return <LoadingSpinner big={true} /> }
 
-  if (isError) { //TODO: ERROR WIDGET
-    return <h2>ERROR on Inf Tweet List</h2>
+  if (isError) {
+    return (
+      <ErrorBox
+        errorTitle="Tweet List Error"
+        errorText="Sorry, there is an Error in the InfiniteTweetList. Please try again or contact us if the issue continues."
+      />
+    );
   }
   if (tweets == null || tweets?.length === 0) {
     return (
