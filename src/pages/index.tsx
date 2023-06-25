@@ -41,7 +41,7 @@ const Home: NextPage = () => {
               return <button key={tab}
                 onClick={() => setSelectedTab(tab)}
                 className={
-                  `flex-grow p-2 hover:bg-slate-200 focus-visible:bg-slate-200
+                  `flex-grow p-2 border-t-2 hover:bg-slate-200 focus-visible:bg-slate-200
                   ${tab === selectedTab ? `bg-amber-50 border-2 border-b-4 border-b-amber-300 text-amber-800 font-semibold`
                     : `text-gray-500`}
                   `

@@ -19,7 +19,7 @@ export default function FollowUserButton({ isFollowing, isLoading, userId, click
   return (
     <Button small gray={isFollowing}
       disabled={isLoading}
-      onClick={() => clickHandler()} className="font-semibold text-sm">
+      onClick={() => clickHandler()} className="font-semibold text-sm md:text-base lg:text-lg">
       {isFollowing ? "Unfollow" : "Follow"}
     </Button>
   );

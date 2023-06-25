@@ -47,27 +47,29 @@ export const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps
     <Head>
       <title>{`T3witter User: ${profile.name}`}</title>
     </Head>
-    <header className="sticky top-0 z-10 flex items-center border-b  bg-white px-4 py-4">
+    <header className="sticky top-0 z-10 flex items-center border-b bg-white px-4 py-4">
       <Link href=".." className="mr-2" title="Go Back">
         <HoverEffectWidget>
           <LeftArrow className="fill-current stroke-current" />
         </HoverEffectWidget>
       </Link>
       <ProfileImage imageSrc={profile.image} className="flex-shrink-0 h-16 w-16" />
-      <div className="ml-2 flex-grow">
+      <div className="ml-1 sm:ml-2">
         <h1 className="pl-2 text-left text-xl font-bold">{profile.name}</h1>
-        <div className="text-gray-500">
-          <span className="pl-2">{tweetsCount}&nbsp;{getPluralString(tweetsCount, "Tweet", "Tweets")}</span>
-          <span className="pl-1">|&nbsp;{followersCount}&nbsp;{getPluralString(followersCount, "Follower", "Followers")}</span>
-          <span className="pl-1">|&nbsp;{followsCount}&nbsp;Following</span>
+        <div className="text-gray-500 text-xs sm:text-sm md:text-base">
+          <div className="inline-block pl-1">&bull;&nbsp;{tweetsCount}&nbsp;{getPluralString(tweetsCount, "Tweet", "Tweets")}</div>
+          <div className="inline-block pl-1">&bull;&nbsp;{followersCount}&nbsp;{getPluralString(followersCount, "Follower", "Followers")}</div>
+          <div className="inline-block pl-1">&bull;&nbsp;Following&nbsp;{followsCount}</div>
         </div>
       </div>
-      <FollowUserButton
-        isFollowing={isFollowing}
-        userId={id}
-        isLoading={toggleFollowing.isLoading}
-        clickHandler={() => toggleFollowing.mutate({ userId: id })}
-      />
+      <div className="flex-1 ml-1 sm:ml-2 flex justify-center lg:justify-start lg:ml-8 items-center">
+        <FollowUserButton
+          isFollowing={isFollowing}
+          userId={id}
+          isLoading={toggleFollowing.isLoading}
+          clickHandler={() => toggleFollowing.mutate({ userId: id })}
+        />
+      </div>
     </header>
     <main>
       <InfiniteTweetList
