@@ -24,9 +24,10 @@ function Form() {
 
       if (session.status !== "authenticated") return; // <~~ clears @TS error for getting id below 👌🤷
 
+      // Returning from setInfinite data causes a TS error ❌❌❌??❌❌❌??❗❗❗
       // In cachedData, the embedded individual Tweets DO NOT HAVE A top-level userId property, just a User{ id }
       // but newTwit automatically comes back with a userID property
-      // @ts-expect-error - not sure why returning from .setInfinite data causes a TS error.
+      // @ts-expect-error - not sure why returning from .setInfinite data causes a TS error ❌❌❌??❌❌❌??
       trpcUtils.tweet.infiniteFeed.setInfiniteData({}, (cachedData) => {
 
         if (!cachedData || cachedData == null || cachedData.pages[0] == null) {
