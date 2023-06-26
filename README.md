@@ -34,12 +34,13 @@ Starts with [T3-Stack](https://create.t3.gg/) via _`create-t3-app`_:
 - [Github](https://github.com/r-i-c-h/t3witter-app) - Source
 - [Vercel](https://vercel.com) - Deployment
 
---
+---
 
 ## TODOs...
 
 - [ ] Settle @ts-ignored TS-issue in NewTweetForm's `setInfniteData` ?😠?
 - [ ] Fix color a11y issues - Amber-500: #F59E0B | amber-200: #FDE68A | amber-700: #B45309
+- [x] Add Skeleton Loaders for Tweet Cards instead of just spinning arrow loader
 - [x] Add Better Error Message Notification
 - [x] Revise [SELF Profile Page] Header to mobile layout and responsive size increases.
 - [x] Revise [Profile Page] Header to mobile layout and responsive size increases INCLUDE FOLLOW BUTTON.

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { type NextPage } from "next";
 import { /* signIn, signOut, */ useSession } from "next-auth/react";
-// import InfiniteTweetsList from "~/components/InfiniteTweetsList";
 import NewTweetForm from "~/components/NewTweetForm";
 import RecentTweets from "~/components/RecentTweets";
 import FollowingTweets from "~/components/FollowingTweets";
@@ -13,7 +12,7 @@ const Home: NextPage = () => {
   const session = useSession();
   const [selectedTab, setSelectedTab] = useState<(typeof TABS)[number]>("Recent");
 
-  // TS wants a login function to have the below void-wrapper:
+  // TS wants a login function to have a void-wrapper as below:
   //>> const handleLogin = () => { void signIn(); }
 
   // For a fully-private non-Twitter experience protect feeds and implement Login+Logout here, not only in Sidebar
