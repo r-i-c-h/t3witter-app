@@ -35,7 +35,9 @@ export default function InfiniteTweetList({ tweets, isLoading, isError, hasMore 
   }
   if (tweets == null || tweets?.length === 0) {
     return (
-      <h2 className="my-4 text-center text-2xl text-grey-500">No [more] Tweets</h2>
+      <div className="bg-gradient-to-b from-amber-50 to-amber-200 text-black px-4 pt-4 pb-1 text-center">
+        <h2 className="my-4 text-center text-2xl text-grey-500">No [More] Tweets 🛑</h2>
+      </div>
     )
   }
 
