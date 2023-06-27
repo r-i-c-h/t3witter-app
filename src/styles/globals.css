@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-amber-900;
+    @apply bg-gradient-to-b from-amber-900 to-amber-800;
   }
 }
 
