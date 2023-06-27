@@ -31,7 +31,7 @@ export default function ExpandingTextArea({ inputValue, setInputValue }: Expandi
   }
 
   return (
-    <textarea className="bg-amber-50 flex-grow resize-none overflow-hidden border text-amber-950 border-amber-600 focus-visible:outline-amber-400 p-4 rounded text-lg placeholder:text-sm placeholder:md:text-lg"
+    <textarea className="bg-amber-50 flex-grow resize-none overflow-hidden text-amber-950 border border-amber-300 focus-visible:outline-amber-600 p-4 rounded text-lg placeholder:text-sm placeholder:md:text-lg"
       ref={inputRef}
       name="new_tw33t"
       id="new_tw33t"
