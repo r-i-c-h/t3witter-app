@@ -7,24 +7,3 @@
     @apply bg-gradient-to-b from-amber-900 to-amber-800;
   }
 }
-
-/* Extra Styles below are for skeleton-loaders' shimmer effect */
-[data-placeholder]::after {
-  content: " ";
-  box-shadow: 0 0 50px 9px rgba(254, 254, 254);
-  position: absolute;
-  top: 0;
-  left: -100%;
-  height: 100%;
-  animation: loaderShimmer 1s infinite;
-}
-
-@keyframes loaderShimmer {
-  0% {
-    left: -100%
-  }
-
-  100% {
-    left: 150%
-  }
-}
