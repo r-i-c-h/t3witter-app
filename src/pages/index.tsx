@@ -32,17 +32,19 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-10 border-b bg-slate-50 pt-2">
-        <h1 className=" md:text-left text-center mb-2 px-4 py-1 text-2xl font-bold">Welcome <span className="">{welcomeString}</span></h1>
+      <header className="sticky top-0 z-10 bg-gradient-to-b from-amber-200 to-amber-50 pt-2">
+        <h1 className="lg:text-left text-center mb-2 px-4 py-1 text-2xl text-amber-900 font-bold">Welcome <span className="">{welcomeString}</span></h1>
         {session.status === "authenticated" && (<>
           <div className="flex">
             {TABS.map(tab => {
               return <button key={tab}
                 onClick={() => setSelectedTab(tab)}
                 className={
-                  `flex-grow p-2 border-t-2 hover:bg-slate-200 focus-visible:bg-slate-200
-                  ${tab === selectedTab ? `bg-amber-50 border-2 border-b-4 border-b-amber-300 text-amber-800 font-semibold`
-                    : `text-gray-500`}
+                  `flex-grow p-2 border-b-4 hover:bg-amber-400 focus-visible:bg-amber-400 hover:text-black focus-visible:text-black transition-colors duration-300 hover:border-amber-800
+
+                  ${tab === selectedTab ?
+                    `border-amber-500 text-amber-950 font-semibold`
+                    : `border-amber-200 text-amber-900`}
                   `
                 }>
                 {tab}
