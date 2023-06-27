@@ -43,11 +43,11 @@ export default function SideNav() {
         }
         {user != null ? ( // User IS Logged IN
           <li>
-            <HoverEffectWidget red>
+            <HoverEffectWidget dark>
               <button onClick={handleLogout} className="group" title="Logout">
                 <span className="flex items-center gap-2 group">
-                  <LogoutIcon className="group-hover:stroke-red-800" />
-                  <span className="hidden text-lg group-hover:text-red-800 md:inline">Logout</span>
+                  <LogoutIcon className="group-hover:stroke-amber-100" />
+                  <span className="hidden text-lg group-hover:text-amber md:inline">Logout</span>
                 </span>
               </button>
             </HoverEffectWidget>
