@@ -48,7 +48,7 @@ export default function TweetCard({ id, user, content, createdAt, likeCount, lik
 
   return (
     <li
-      className="flex gap-4 border-b px-4 pt-4 pb-1"
+      className="bg-amber-50 flex gap-4 border-b px-4 pt-4 pb-1"
       key={id}>
       <Link href={`/profiles/${user.id}`}>
         <ProfileImage imageSrc={user.image} />
@@ -57,12 +57,12 @@ export default function TweetCard({ id, user, content, createdAt, likeCount, lik
         <div className="flex gap-1 items-center">
           <Link
             href={`/profiles/${user.id}`}
-            className='font-bold text-amber-500 hover:underline focus-visible:underline outline-none '
+            className='font-bold text-amber-900 hover:underline focus-visible:underline outline-none '
           >{user.name}</Link>
-          <span className="text-gray-500 text-xs italic">- {nativeTimeFormatter.format(createdAt)}</span>
+          <span className="text-amber-950 text-xs italic">- {nativeTimeFormatter.format(createdAt)}</span>
         </div>
-        <p className="whitespace-pre-wrap font-semibold my-1">{content}</p>
-        <div className="flex items-center gap-1 self-start text-gray-700">
+        <p className="text-black whitespace-pre-wrap font-semibold my-1">{content}</p>
+        <div className="flex items-center gap-1 self-start text-amber-900">
           <HeartLikeButton
             handleClick={handleToggleLike}
             isLoading={toggleLike.isLoading}
