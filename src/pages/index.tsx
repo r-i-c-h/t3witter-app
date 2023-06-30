@@ -35,7 +35,7 @@ const Home: NextPage = () => {
               return <button key={tab}
                 onClick={() => setSelectedTab(tab)}
                 className={
-                  `font-serif text-lg flex-grow p-2 border-b-4 hover:bg-amber-400 focus-visible:bg-amber-400 hover:text-black focus-visible:text-black transition-colors duration-300 hover:border-amber-800
+                  `text-lg flex-grow p-2 border-b-4 hover:bg-amber-400 focus-visible:bg-amber-400 hover:text-black focus-visible:text-black transition-colors duration-300 hover:border-amber-800
                   ${tab === selectedTab ? `border-amber-500 text-amber-950 font-semibold` : `border-amber-200 text-amber-900`}
                   `
                 }>

@@ -15,7 +15,7 @@ export default function WelcomeHeader() {
   } else { // PUBLIC PATH
     return (
       <h1 className={`text-3xl text-center px-4 pb-8 pt-1 text-amber-900 font-bold`}>
-        <span className="uppercase font-sans">Welcome To</span> <span className="uppercase font-mono">T3witter</span>
+        <span className="uppercase">Welcome To</span> <span className="uppercase font-mono">T3witter</span>
       </h1>
     );
   }

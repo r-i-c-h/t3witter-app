@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    /*! Workaround for replacing the `font-sans` in the tailwind.config file because currently you can't import the defaultTheme variable owing to TS issues. */
+    /* Correct way would be to overwrite\extend the 'sans' settings on the tailwind.config - see https: //nextjs.org/docs/app/building-your-application/optimizing/fonts#with-tailwind-css  */
+    font-family: 'Open Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
   body {
     @apply bg-gradient-to-b from-amber-900 to-amber-800;
   }
