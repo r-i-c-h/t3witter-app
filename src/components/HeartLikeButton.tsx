@@ -23,7 +23,7 @@ export default function HeartLikeButton({ isLoading, handleClick, likedByMe, lik
   // Public View
   if (session.status !== "authenticated") {
     return (<>
-      <HeartIcon className={`${sizesDictionary[size]} stroke-black stroke-2 fill-gray-400`} />
+      <HeartIcon className={`${sizesDictionary[size]} stroke-2 ${likedCount > 0 ? ` fill-amber-400` : `fill-none`}`} />
       <span>{likedCount}</span>
     </>
     );

@@ -32,7 +32,6 @@ export default function TweetCard({ id, user, content, createdAt, likeCount, lik
 
                 return tweet;  // Otherwise fogettaboutit
               })
-
             }
           })
         }
@@ -48,7 +47,7 @@ export default function TweetCard({ id, user, content, createdAt, likeCount, lik
 
   return (
     <li
-      className="bg-amber-50 flex gap-4 border-b px-4 pt-4 pb-1"
+      className="bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-amber-50 from-80% flex gap-4 border-b border-b-amber-700 px-4 pt-4 pb-1 border-r border-r-amber-500"
       key={id}>
       <Link href={`/profiles/${user.id}`}>
         <ProfileImage imageSrc={user.image} />
@@ -59,7 +58,7 @@ export default function TweetCard({ id, user, content, createdAt, likeCount, lik
             href={`/profiles/${user.id}`}
             className='font-bold text-amber-900 hover:underline focus-visible:underline outline-none '
           >{user.name}</Link>
-          <span className="text-amber-950 text-xs italic">- {nativeTimeFormatter.format(createdAt)}</span>
+          <span className="text-amber-950 text-xs italic tracking-tighter">- {nativeTimeFormatter.format(createdAt)}</span>
         </div>
         <p className="text-black whitespace-pre-wrap font-semibold my-1">{content}</p>
         <div className="flex items-center gap-1 self-start text-amber-900">
