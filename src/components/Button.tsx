@@ -18,7 +18,7 @@ export default function Button({ type = "submit", small = false, gray = false, c
   return (
     <button
       type={type}
-      className={`w-auto text-white active:text-black active:shadow-none active:outline active:outline-2 rounded-md hover:text-opacity-50 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${sizeClasses} ${colorClasses} ${className}`}
+      className={`w-auto text-white active:text-black shadow-black shadow-sm active:shadow-none active:outline active:outline-2 rounded-md  hover:text-black hover:bg-amber-500 transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-50 ${sizeClasses} ${colorClasses} ${className}`}
       {...props}
     ></button>
   );

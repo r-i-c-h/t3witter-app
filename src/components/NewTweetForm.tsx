@@ -82,7 +82,7 @@ function Form() {
   return (<>
     <form
       onSubmit={handleSubmit}
-      className="bg-amber-50 flex flex-col gap-2 border-b px-4 py-2"
+      className="bg-amber-50 flex flex-col gap-2 px-4 py-2 border-b border-b-amber-300 drop-shadow-lg"
     >
       <div className="flex gap-4">
         <ProfileImage imageSrc={session.data?.user.image} />
