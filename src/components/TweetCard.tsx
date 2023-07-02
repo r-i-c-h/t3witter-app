@@ -47,7 +47,7 @@ export default function TweetCard({ id, user, content, createdAt, likeCount, lik
 
   return (
     <li
-      className="bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-amber-50 from-80% flex gap-4 border-b border-b-amber-700 px-4 pt-4 pb-1 border-r border-r-amber-500"
+      className="bg-[radial-gradient(ellipse_at_left,_var(--tw-gradient-stops))] from-amber-50 from-80% flex gap-4 border-b border-b-amber-700 px-4 pt-4 pb-1 border-r border-r-amber-500 animate-apparate"
       key={id}>
       <Link href={`/profiles/${user.id}`}>
         <ProfileImage imageSrc={user.image} />
