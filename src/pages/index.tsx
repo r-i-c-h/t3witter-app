@@ -27,7 +27,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <header className="sticky top-0 z-10 bg-gradient-to-b from-amber-200 to-amber-50 pt-2">
+      <header className="sticky top-0 z-10 bg-gradient-to-b from-amber-200 to-amber-50 pt-2 shadow-md">
         <WelcomeHeader />
         {session.status === "authenticated" && (<>
           <div className="flex">
