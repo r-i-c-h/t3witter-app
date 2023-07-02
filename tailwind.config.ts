@@ -16,9 +16,15 @@ export default {
         complete_line: {
           '100%': { strokeDashoffset: 0 },
         },
+        'tracking-in-expand': {
+          '0%': { 'letter-spacing': '-.5em', opacity: '0' },
+          '40%': { opacity: '0.6' },
+          '100%': { opacity: '1' }
+        }
       },
       animation: {
         'apparate': 'apparate 1s forwards',
+        'tracking-in-expand': 'tracking-in-expand 0.7s cubic-bezier(0.215, 0.610, 0.355, 1.000) both',
         'draw-welcome': '6000ms cubic-bezier(0.83, 0, 0.17, 1) forwards complete_line, 2000ms ease-out infinite alternate amber_fill'
       },
     },
