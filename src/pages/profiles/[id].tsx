@@ -47,16 +47,16 @@ export const ProfilePage: NextPage<InferGetStaticPropsType<typeof getStaticProps
     <Head>
       <title>{`T3witter User: ${profile.name}`}</title>
     </Head>
-    <header className="sticky top-0 z-10 flex items-center border-b bg-white px-4 py-4">
+    <header className="sticky top-0 z-10 flex items-center border-b bg-slate-50 px-4 py-4 shadow-md">
       <Link href=".." className="mr-2" title="Go Back">
         <HoverEffectWidget>
           <LeftArrow className="fill-current stroke-current" />
         </HoverEffectWidget>
       </Link>
-      <ProfileImage imageSrc={profile.image} className="flex-shrink-0 h-16 w-16" />
+      <ProfileImage imageSrc={profile.image} className="flex-shrink-0 h-16 w-16 motion-safe:animate-apparate" />
       <div className="ml-1 sm:ml-2">
-        <h1 className="pl-2 text-left text-xl font-bold">{profile.name}</h1>
-        <div className="text-gray-500 text-xs sm:text-sm md:text-base">
+        <h1 className="pl-2 text-left text-xl font-bold motion-safe:animate-apparate">{profile.name}</h1>
+        <div className="text-gray-500 text-xs sm:text-sm md:text-base motion-safe:animate-apparate">
           <div className="inline-block pl-1">&bull;&nbsp;{tweetsCount}&nbsp;{getPluralString(tweetsCount, "Tweet", "Tweets")}</div>
           <div className="inline-block pl-1">&bull;&nbsp;{followersCount}&nbsp;{getPluralString(followersCount, "Follower", "Followers")}</div>
           <div className="inline-block pl-1">&bull;&nbsp;Following&nbsp;{followsCount}</div>
