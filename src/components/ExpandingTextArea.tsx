@@ -35,6 +35,7 @@ export default function ExpandingTextArea({ inputValue, setInputValue }: Expandi
       ref={inputRef}
       name="new_tw33t"
       id="new_tw33t"
+      maxLength={190}
       /* style height is 0 because text-area will self-enlarge via updateSize() above  */
       style={{ height: 0 }}
       placeholder={getFillerText()}
