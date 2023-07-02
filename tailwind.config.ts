@@ -14,7 +14,7 @@ export default {
           '100%': { opacity: '1', fill: '#FCD34D' },
         },
         complete_line: {
-          '100%': { strokeDashoffset: 0 },
+          '100%': { strokeDashoffset: '0' },
         },
         'tracking-in-expand': {
           '0%': { 'letter-spacing': '-.5em', opacity: '0' },
